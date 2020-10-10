@@ -59,7 +59,7 @@ class MongoDB implements AuthorizationCodeInterface,
     public function checkClientCredentials($client_id, $client_secret = null)
     {
         if ($result = $this->collection('client_table')->findOne(array('client_id' => $client_id))) {
-            return $result['client_secret'] == $client_secret;
+            return password_verify($client_secret, $result['client_secret']);
         }
         return false;
     }

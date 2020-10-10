@@ -297,8 +297,7 @@ class Cassandra implements AuthorizationCodeInterface,
             return false;
         }
 
-        return isset($client['client_secret'])
-            && $client['client_secret'] == $client_secret;
+        return isset($client['client_secret']) && password_verify($client_secret, $client['client_secret']);
     }
 
     /**

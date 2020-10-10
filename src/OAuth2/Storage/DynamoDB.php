@@ -84,7 +84,7 @@ class DynamoDB implements
             "Key" => array('client_id'   => array('S' => $client_id))
         ));
 
-        return  $result->count()==1 && $result["Item"]["client_secret"]["S"] == $client_secret;
+        return $result->count()==1 && password_verify($client_secret, $result["Item"]["client_secret"]["S"]);
     }
 
     public function isPublicClient($client_id)

@@ -71,7 +71,7 @@ class CouchbaseDB implements AuthorizationCodeInterface,
     public function checkClientCredentials($client_id, $client_secret = null)
     {
         if ($result = $this->getObjectByType('client_table',$client_id)) {
-            return $result['client_secret'] == $client_secret;
+            return password_verify($client_secret, $result['client_secret']);
         }
 
         return false;

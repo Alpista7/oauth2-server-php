@@ -96,7 +96,7 @@ class Pdo implements
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         // make this extensible
-        return $result && $result['client_secret'] == $client_secret;
+        return $result && password_verify($client_secret, $result['client_secret']);
     }
 
     /**

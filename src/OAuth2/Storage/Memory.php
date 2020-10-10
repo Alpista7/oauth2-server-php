@@ -166,7 +166,7 @@ class Memory implements AuthorizationCodeInterface,
     /* ClientCredentialsInterface */
     public function checkClientCredentials($client_id, $client_secret = null)
     {
-        return isset($this->clientCredentials[$client_id]['client_secret']) && $this->clientCredentials[$client_id]['client_secret'] === $client_secret;
+        return isset($this->clientCredentials[$client_id]['client_secret']) && password_verify(client_secret, $this->clientCredentials[$client_id]['client_secret']);
     }
 
     public function isPublicClient($client_id)
