@@ -343,13 +343,13 @@ class DynamoDB implements
     // plaintext passwords are bad!  Override this for your application
     protected function checkPassword($user, $password)
     {
-        return $user['password'] == $this->hashPassword($password);
+        return password_verify($password, $user['password']);
     }
 
     // use a secure hashing algorithm when storing passwords. Override this for your application
     protected function hashPassword($password)
     {
-        return sha1($password);
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function getUser($username)

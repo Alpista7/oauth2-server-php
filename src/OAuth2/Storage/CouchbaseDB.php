@@ -255,10 +255,9 @@ class CouchbaseDB implements AuthorizationCodeInterface,
         return true;
     }
 
-    // plaintext passwords are bad!  Override this for your application
     protected function checkPassword($user, $password)
     {
-        return $user['password'] == $password;
+        return password_verify($password, $user['password']);
     }
 
     public function getUser($username)
